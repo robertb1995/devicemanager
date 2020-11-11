@@ -85,6 +85,4 @@ I am aware the script is only for Windows - due to time issues no Linux was crea
 
 I am aware there is no security (also no time - and not in the requirements)
 
-I am aware an integration test with in memory would be nice to test the whole flow and also the queries (for same reason as above not implemented)
-
 Dockerfile and dockercompose also not present due to lack of time,
