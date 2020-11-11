@@ -48,7 +48,7 @@ PUT localhost:8080/device/{id} , sample request body: <br>
 Fully updates the given entity and returns 200, if ID is inexistent returns 404
 
 ADDITIONAL INFORMATION:
-I am aware that the Controller is lacking validations, however due to lack of time (I set aside around 6-7 hours to complete this whole task)
+I am aware that the Controller is lacking validations, however due to lack of time (I set aside around 6 hours to complete this whole task + 3 hours after deadline)
 I wasn't able to implement them on time. (also not in the requirements - however I thought it still would've been nice to handle them) <br>
 
 I am aware the script is only for Windows - due to time issues no Linux .sh was created
