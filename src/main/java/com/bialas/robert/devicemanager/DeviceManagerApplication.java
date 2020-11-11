@@ -8,10 +8,10 @@ import java.time.Clock;
 import java.time.ZoneId;
 
 @SpringBootApplication
-public class DevicemanagerApplication {
+public class DeviceManagerApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(DevicemanagerApplication.class, args);
+        SpringApplication.run(DeviceManagerApplication.class, args);
     }
 
     @Bean
