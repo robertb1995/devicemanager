@@ -1,11 +1,13 @@
 package com.bialas.robert.devicemanager.service;
 
 import com.bialas.robert.devicemanager.domain.dto.DeviceDTO;
+import com.bialas.robert.devicemanager.domain.entity.Brand;
 import com.bialas.robert.devicemanager.domain.entity.Device;
 import com.bialas.robert.devicemanager.mapper.DeviceDTOMapper;
 import com.bialas.robert.devicemanager.mapper.DeviceDTOMapperImpl;
 import com.bialas.robert.devicemanager.repository.DeviceRepository;
 import com.bialas.robert.devicemanager.service.exception.DeviceAlreadyExistentException;
+import com.bialas.robert.devicemanager.service.exception.DeviceNotFoundException;
 import com.bialas.robert.devicemanager.util.BrandTestUtils;
 import com.bialas.robert.devicemanager.util.DeviceTestUtils;
 import org.junit.Before;
@@ -13,6 +15,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.dao.EmptyResultDataAccessException;
 
 import java.time.Clock;
 import java.time.Instant;
@@ -25,7 +28,7 @@ import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DeviceServiceTest {
@@ -116,7 +119,7 @@ public class DeviceServiceTest {
     }
 
     @Test
-    public void givenExistentDeviceId_whenFindByIdCalled_returnDeviceDTO() {
+    public void givenExistentDeviceId_whenFindByIdCalled_returnOptionalOfDeviceDTO() {
         //given
         Long existentDeviceId = 1L;
         Device addedDevice = DeviceTestUtils.getExpectedDeviceAfterCreation();
@@ -145,11 +148,156 @@ public class DeviceServiceTest {
                 .collect(Collectors.toList()), result);
     }
 
-    /*
-    todo (due to lack of time)
-    delete by id test for exception thrown and for calling the right repo method
-    partial update and full update tests (two each with checking to check when optional is empty and with result), the one with partial including the brandName to directly test the functionality
-    find by brand test (just one - since will just return an empty list if none found)
-    */
+    @Test
+    public void givenExistentDeviceId_whenDeleteByIdCalled_verifyDeleteRepositoryIsCalledOnceForGivenId() {
+        //given
+        Long existentDeviceId = 1L;
+
+        //when
+        deviceService.deleteById(existentDeviceId);
+
+        //then
+        verify(deviceRepository).deleteById(existentDeviceId);
+    }
+
+    @Test
+    public void givenInexistentDeviceId_whenDeleteByIdCalled_throwDeviceNotFoundExceptionWithAppropriateMessage() {
+        //given
+        Long inexistentDeviceId = 1000L;
+        String message = "Entity with id 1000L hasn't been found!";
+
+        doThrow(new EmptyResultDataAccessException(message, 0)).when(deviceRepository).deleteById(inexistentDeviceId);
+
+        //when and then
+        DeviceNotFoundException deviceAlreadyExistentException = assertThrows(DeviceNotFoundException.class, () -> deviceService.deleteById(inexistentDeviceId));
+        assertEquals(message, deviceAlreadyExistentException.getMessage());
+    }
+
+    @Test
+    public void givenExistentBrandId_whenFindAllByBrand_returnListOfDevicesForGivenBrand() {
+        //given
+        String existentBrandName = "Mayo";
+        Device expectedDevice = DeviceTestUtils.getExpectedDeviceAfterCreation();
+        when(deviceRepository.findAllByBrandName(existentBrandName)).thenReturn(Collections.singletonList(expectedDevice));
+
+        //when
+        List<DeviceDTO> result = deviceService.findAllByBrand(existentBrandName);
+
+        //then
+        assertEquals(Collections.singletonList(deviceDTOMapper.toDeviceDTO(expectedDevice)), result);
+    }
+
+    @Test
+    public void givenExistentIdAndDtoWithAllProperties_whenFullyUpdateDeviceCalled_returnOptionalOfUpdatedDevice() {
+        //given
+        Long existentId = 1L;
+        String deviceNameToUpdate = "newName";
+        String brandNameToUpdate = "newBrand";
+        ZonedDateTime zonedDateTime = ZonedDateTime.of(2005, 5, 5, 5, 5, 5, 5, ZoneId.of("UTC"));
+        DeviceDTO newDeviceDTO = DeviceDTO.builder()
+                .deviceName(deviceNameToUpdate)
+                .brandName(brandNameToUpdate)
+                .creationTime(zonedDateTime)
+                .build();
+
+        Device addedDevice = DeviceTestUtils.getExpectedDeviceAfterCreation();
+        Device beforeUpdateDevice = Device.builder()
+                .id(1L)
+                .deviceName(deviceNameToUpdate)
+                .brand(Brand.builder()
+                        .name(brandNameToUpdate)
+                        .build())
+                .creationTime(zonedDateTime)
+                .build();
+
+        when(deviceRepository.findById(existentId)).thenReturn(Optional.of(addedDevice));
+        when(brandService.findById(brandNameToUpdate)).thenReturn(Optional.empty());
+        when(deviceRepository.save(beforeUpdateDevice)).thenReturn(beforeUpdateDevice);
+
+        //when
+        Optional<DeviceDTO> result = deviceService.fullyUpdateDevice(existentId, newDeviceDTO);
+
+        //then
+        newDeviceDTO.setId(addedDevice.getId());
+        assertEquals(Optional.of(newDeviceDTO), result);
+    }
+
+    @Test
+    public void givenNonExistentId_whenFullyUpdateDeviceCalled_returnEmptyOptional() {
+        //given
+        Long nonExistentId = 1000L;
+        String deviceNameToUpdate = "newName";
+        String brandNameToUpdate = "newBrand";
+        ZonedDateTime zonedDateTime = ZonedDateTime.of(2005, 5, 5, 5, 5, 5, 5, ZoneId.of("UTC"));
+        DeviceDTO newDeviceDTO = DeviceDTO.builder()
+                .deviceName(deviceNameToUpdate)
+                .brandName(brandNameToUpdate)
+                .creationTime(zonedDateTime)
+                .build();
+
+        when(deviceRepository.findById(nonExistentId)).thenReturn(Optional.empty());
+
+        //when
+        Optional<DeviceDTO> result = deviceService.fullyUpdateDevice(nonExistentId, newDeviceDTO);
+
+        //then
+        assertEquals(Optional.empty(), result);
+    }
+
+    @Test
+    public void givenExistentIdAndDtoWithNewBrandNameAndDeviceName_whenPartiallyUpdateDeviceCalled_returnOptionalOfUpdatedDevice() {
+        //given
+        Long existentId = 1L;
+        String deviceNameToUpdate = "newName";
+        String brandNameToUpdate = "newBrand";
+
+        DeviceDTO newDeviceDTO = DeviceDTO.builder()
+                .deviceName(deviceNameToUpdate)
+                .brandName(brandNameToUpdate)
+                .build();
+
+        Device addedDevice = DeviceTestUtils.getExpectedDeviceAfterCreation();
+        Device beforeUpdateDevice = Device.builder()
+                .id(1L)
+                .deviceName(deviceNameToUpdate)
+                .brand(Brand.builder()
+                        .name(brandNameToUpdate)
+                        .build())
+                .creationTime(addedDevice.getCreationTime())
+                .build();
+
+        when(deviceRepository.findById(existentId)).thenReturn(Optional.of(addedDevice));
+        when(brandService.findById(brandNameToUpdate)).thenReturn(Optional.empty());
+        when(deviceRepository.save(beforeUpdateDevice)).thenReturn(beforeUpdateDevice);
+
+        //when
+        Optional<DeviceDTO> result = deviceService.partiallyUpdateDevice(existentId, newDeviceDTO);
+
+        //then
+        newDeviceDTO.setId(addedDevice.getId());
+        newDeviceDTO.setCreationTime(addedDevice.getCreationTime());
+        assertEquals(Optional.of(newDeviceDTO), result);
+    }
+
+    @Test
+    public void givenNonExistentId_whenPartiallyUpdateDeviceCalled_returnEmptyOptional() {
+        //given
+        Long nonExistentId = 1000L;
+        String deviceNameToUpdate = "newName";
+        String brandNameToUpdate = "newBrand";
+
+        DeviceDTO newDeviceDTO = DeviceDTO.builder()
+                .deviceName(deviceNameToUpdate)
+                .brandName(brandNameToUpdate)
+                .build();
+
+        when(deviceRepository.findById(nonExistentId)).thenReturn(Optional.empty());
+
+        //when
+        Optional<DeviceDTO> result = deviceService.partiallyUpdateDevice(nonExistentId, newDeviceDTO);
+
+        //then
+        assertEquals(Optional.empty(), result);
+    }
 
 }
