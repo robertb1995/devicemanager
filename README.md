@@ -92,3 +92,5 @@ I am aware an integration test with in memory would be nice to test the whole fl
 Mapper behavior is not tested - this should be tested (placeholder was left)
 
 Dockerfile and dockercompose also not present due to lack of time,
+
+Under normal professional conditions I would not push to master, but rather create a branch for each task and open pull requests
