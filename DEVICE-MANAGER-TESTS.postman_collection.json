@@ -1,0 +1,862 @@
+{
+	"info": {
+		"_postman_id": "8b7f0a62-8827-424f-9f24-3fbcf8ab6efd",
+		"name": "DEVICE-MANAGER-TESTS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "POST localhost:8080/device",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"deviceName\" : \"Name\", \"brandName\" : \"Mayo\" }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/device",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"device"
+					]
+				},
+				"description": "Adds first device with new brand name, returns OK status"
+			},
+			"response": [
+				{
+					"name": "POST localhost:8080/device",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"deviceName\" : \"Name\", \"brandName\" : \"Mayo\" }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/device",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"device"
+							]
+						}
+					},
+					"status": "Conflict",
+					"code": 409,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "76"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 11 Nov 2020 02:45:59 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "The device with name Name and brand Mayo is already present in the database."
+				}
+			]
+		},
+		{
+			"name": "POST localhost:8080/device #2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"deviceName\" : \"SecondName\", \"brandName\" : \"Mayo\" }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/device",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"device"
+					]
+				},
+				"description": "Adds a second device with the same brand name, returns OK status"
+			},
+			"response": [
+				{
+					"name": "POST localhost:8080/device #2",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"deviceName\" : \"SecondName\", \"brandName\" : \"Mayo\" }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/device",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"device"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 11 Nov 2020 02:47:26 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 34,\n    \"deviceName\": \"SecondName\",\n    \"brandName\": \"Mayo\",\n    \"creationTime\": \"2020-11-11T02:47:26.243253Z\"\n}"
+				}
+			]
+		},
+		{
+			"name": "POST localhost:8080/device #3",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"deviceName\" : \"KetchupName\", \"brandName\" : \"Ketchup\" }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/device",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"device"
+					]
+				},
+				"description": "Adds a second device with the a new brand name, returns OK status"
+			},
+			"response": [
+				{
+					"name": "POST localhost:8080/device #3",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"deviceName\" : \"KetchupName\", \"brandName\" : \"Ketchup\" }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/device",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"device"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 11 Nov 2020 02:49:20 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 35,\n    \"deviceName\": \"KetchupName\",\n    \"brandName\": \"Ketchup\",\n    \"creationTime\": \"2020-11-11T02:49:20.528631Z\"\n}"
+				}
+			]
+		},
+		{
+			"name": "GET localhost:8080/device/{id}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/device",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"device"
+					]
+				},
+				"description": "Gets device under given {id} and returns OK status, if {id} is inexistent in DB returns NOT_FOUND status"
+			},
+			"response": [
+				{
+					"name": "GET localhost:8080/device",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/device",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"device"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 11 Nov 2020 02:51:25 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 1,\n        \"deviceName\": \"vcer\",\n        \"brandName\": \"Aceron\",\n        \"creationTime\": \"2025-11-10T02:43:31.953124+01:00\"\n    },\n    {\n        \"id\": 2,\n        \"deviceName\": \"Alpha\",\n        \"brandName\": \"Demo\",\n        \"creationTime\": \"2020-11-10T23:26:37.171099+01:00\"\n    },\n    {\n        \"id\": 33,\n        \"deviceName\": \"Name\",\n        \"brandName\": \"Mayo\",\n        \"creationTime\": \"2020-11-11T03:45:54.521429+01:00\"\n    },\n    {\n        \"id\": 34,\n        \"deviceName\": \"SecondName\",\n        \"brandName\": \"Mayo\",\n        \"creationTime\": \"2020-11-11T03:47:26.243253+01:00\"\n    },\n    {\n        \"id\": 35,\n        \"deviceName\": \"KetchupName\",\n        \"brandName\": \"Ketchup\",\n        \"creationTime\": \"2020-11-11T03:49:20.528631+01:00\"\n    }\n]"
+				},
+				{
+					"name": "GET localhost:8080/device",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/device/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"device",
+								"1"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 11 Nov 2020 02:50:18 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1,\n    \"deviceName\": \"vcer\",\n    \"brandName\": \"Aceron\",\n    \"creationTime\": \"2025-11-10T02:43:31.953124+01:00\"\n}"
+				},
+				{
+					"name": "GET localhost:8080/device",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/device",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"device"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 11 Nov 2020 02:56:46 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 2,\n        \"deviceName\": \"Alpha\",\n        \"brandName\": \"Demo\",\n        \"creationTime\": \"2020-11-10T23:26:37.171099+01:00\"\n    },\n    {\n        \"id\": 33,\n        \"deviceName\": \"Name\",\n        \"brandName\": \"Mayo\",\n        \"creationTime\": \"2020-11-11T03:45:54.521429+01:00\"\n    },\n    {\n        \"id\": 34,\n        \"deviceName\": \"SecondName\",\n        \"brandName\": \"Mayo\",\n        \"creationTime\": \"2020-11-11T03:47:26.243253+01:00\"\n    },\n    {\n        \"id\": 35,\n        \"deviceName\": \"vcer\",\n        \"brandName\": \"Aceron\",\n        \"creationTime\": \"2025-11-10T02:43:31.953124+01:00\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "GET localhost:8080/device",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/device",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"device"
+					]
+				},
+				"description": "Gets all devices and returns OK status, empty list and 200 if no devices are present\r\n\r\n"
+			},
+			"response": [
+				{
+					"name": "GET localhost:8080/device",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/device",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"device"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 11 Nov 2020 02:56:38 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 2,\n        \"deviceName\": \"Alpha\",\n        \"brandName\": \"Demo\",\n        \"creationTime\": \"2020-11-10T23:26:37.171099+01:00\"\n    },\n    {\n        \"id\": 33,\n        \"deviceName\": \"Name\",\n        \"brandName\": \"Mayo\",\n        \"creationTime\": \"2020-11-11T03:45:54.521429+01:00\"\n    },\n    {\n        \"id\": 34,\n        \"deviceName\": \"SecondName\",\n        \"brandName\": \"Mayo\",\n        \"creationTime\": \"2020-11-11T03:47:26.243253+01:00\"\n    },\n    {\n        \"id\": 35,\n        \"deviceName\": \"vcer\",\n        \"brandName\": \"Aceron\",\n        \"creationTime\": \"2025-11-10T02:43:31.953124+01:00\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "GET localhost:8080/device?brand={brand}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/device?brand=Mayo",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"device"
+					],
+					"query": [
+						{
+							"key": "brand",
+							"value": "Mayo"
+						}
+					]
+				},
+				"description": "Gets all devices for given {brand} and returns OK status, brand is the name of the brand, empty list and 200 if no devices are present"
+			},
+			"response": [
+				{
+					"name": "GET localhost:8080/device?brand={brand}",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/device?brand=Mayo",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"device"
+							],
+							"query": [
+								{
+									"key": "brand",
+									"value": "Mayo"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 11 Nov 2020 02:52:11 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 33,\n        \"deviceName\": \"Name\",\n        \"brandName\": \"Mayo\",\n        \"creationTime\": \"2020-11-11T03:45:54.521429+01:00\"\n    },\n    {\n        \"id\": 34,\n        \"deviceName\": \"SecondName\",\n        \"brandName\": \"Mayo\",\n        \"creationTime\": \"2020-11-11T03:47:26.243253+01:00\"\n    }\n]"
+				},
+				{
+					"name": "GET localhost:8080/device?brand={brand}",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/device?brand=Mayo",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"device"
+							],
+							"query": [
+								{
+									"key": "brand",
+									"value": "Mayo"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 11 Nov 2020 02:52:11 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 33,\n        \"deviceName\": \"Name\",\n        \"brandName\": \"Mayo\",\n        \"creationTime\": \"2020-11-11T03:45:54.521429+01:00\"\n    },\n    {\n        \"id\": 34,\n        \"deviceName\": \"SecondName\",\n        \"brandName\": \"Mayo\",\n        \"creationTime\": \"2020-11-11T03:47:26.243253+01:00\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "DELETE localhost:8080/device/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/device/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"device",
+						"1"
+					]
+				},
+				"description": "Deletes the device with the given {id} and returns NO_CONTENT status, if the id is not present returns 404"
+			},
+			"response": [
+				{
+					"name": "DELETE localhost:8080/device/{id}",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/device/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"device",
+								"1"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 11 Nov 2020 02:53:23 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "DELETE localhost:8080/device/{id}",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/device/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"device",
+								"1"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 11 Nov 2020 02:53:23 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "PATCH localhost:8080/device/{id}",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"deviceName\" : \"Mena\", \"brandName\" : \"Ketchup\" }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/device/35",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"device",
+						"35"
+					]
+				},
+				"description": "Partially updates the entity and returns 200, if ID inexistent returns NOT_FOUND"
+			},
+			"response": [
+				{
+					"name": "PATCH localhost:8080/device/{id}",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"deviceName\" : \"Mena\", \"brandName\" : \"Ketchup\" }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/device/35",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"device",
+								"35"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 11 Nov 2020 02:55:01 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 35,\n    \"deviceName\": \"Mena\",\n    \"brandName\": \"Ketchup\",\n    \"creationTime\": \"2020-11-11T03:49:20.528631+01:00\"\n}"
+				}
+			]
+		},
+		{
+			"name": "PUT localhost:8080/device/{id}",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"deviceName\" : \"vcer\", \"brandName\" : \"Aceron\", \"creationTime\": \"2025-11-10T02:43:31.953124+01:00\" }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/device/35",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"device",
+						"35"
+					]
+				},
+				"description": "Fully updates the given entity and returns 200, if ID is inexistent returns 404"
+			},
+			"response": [
+				{
+					"name": "PUT localhost:8080/device/{id}",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"deviceName\" : \"vcer\", \"brandName\" : \"Aceron\", \"creationTime\": \"2025-11-10T02:43:31.953124+01:00\" }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/device/35",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"device",
+								"35"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 11 Nov 2020 02:55:59 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 35,\n    \"deviceName\": \"vcer\",\n    \"brandName\": \"Aceron\",\n    \"creationTime\": \"2025-11-10T01:43:31.953124Z\"\n}"
+				}
+			]
+		}
+	],
+	"protocolProfileBehavior": {}
+}
