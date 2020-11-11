@@ -10,7 +10,7 @@ DATABASE:
 H2 console available at: 
 http://localhost:8080/h2-console
 
-REQUESTS FOR MANUAL TESTING (which was completed in the following sequence):
+REQUESTS FOR MANUAL TESTING (which was completed in the following sequence - all carried out using Postman - unfortunately no test collection was made):
 1. POST localhost:8080/device, request body: <br> {
                                                  "deviceName" : "Name",
                                                  "brandName" : "Mayo"
@@ -91,4 +91,4 @@ I am aware an integration test with in memory would be nice to test the whole fl
 
 Mapper behavior is not tested - this should be tested (placeholder was left)
 
-
+Dockerfile and dockercompose also not present due to lack of time,
