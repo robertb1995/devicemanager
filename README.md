@@ -78,19 +78,13 @@ when brand is deleted then devices are deleted (as expected)
 14. SQL queries checked using show_sql set to true, in order to avoid n+1 problem and try to create most efficient queries.
 
 ADDITIONAL INFORMATION:
-I am aware that the Controller is lacking validations, however due to lack of time (I set aside around 6-7 hours to complete this task)
-I wasn't able to implement them on time. <br>
+I am aware that the Controller is lacking validations, however due to lack of time (I set aside around 6-7 hours to complete this whole task)
+I wasn't able to implement them on time. (also not in the requirements - however I thought it still would've been nice to handle them) <br>
 
 I am aware the script is only for Windows - due to time issues no Linux was created - I would have then wrote a quick .sh
 
 I am aware there is no security (also no time - and not in the requirements)
 
-Some code in tests is duplicated but did not have the time to clean (same can be the case for unused imports), also tests due to lack of time are not fully completed.
-
 I am aware an integration test with in memory would be nice to test the whole flow and also the queries (for same reason as above not implemented)
 
-Mapper behavior is not tested - this should be tested (placeholder was left)
-
 Dockerfile and dockercompose also not present due to lack of time,
-
-Under normal professional conditions I would not push to master, but rather create a branch for each task and open pull requests
